@@ -1,0 +1,20 @@
+{
+  "name": "janfish/phalcon-db-reconnection",
+  "description": "Reconnect MYSQL when the database loses connection",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Robert",
+      "email": "robert@janfish.cn"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "ext-phalcon": "3.4.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Janfish\\Phalcon\\Db": "src/"
+    }
+  }
+}
