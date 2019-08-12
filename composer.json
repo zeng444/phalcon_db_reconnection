@@ -10,7 +10,8 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "ext-phalcon": "3.4.*"
+    "ext-phalcon": "3.4.*",
+    "ext-pdo": "*"
   },
   "autoload": {
     "psr-4": {

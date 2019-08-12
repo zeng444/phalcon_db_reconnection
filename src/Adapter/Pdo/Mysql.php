@@ -104,7 +104,7 @@ class Mysql extends PdoMysql
      * Author:Robert
      *
      * @param bool $nesting
-     * @return bool
+     * @return bool|\Exception|\PDOException
      */
     public function rollback($nesting = true)
     {
@@ -115,7 +115,7 @@ class Mysql extends PdoMysql
                 throw $exception;
             }
             $this->reconnect();
-            return $this->rollback($nesting);
+            return $exception;
         }
     }
 
@@ -123,7 +123,7 @@ class Mysql extends PdoMysql
      * Author:Robert
      *
      * @param bool $nesting
-     * @return bool
+     * @return bool|\Exception|\PDOException
      */
     public function commit($nesting = true)
     {
@@ -134,7 +134,7 @@ class Mysql extends PdoMysql
                 throw $exception;
             }
             $this->reconnect();
-            return $this->commit($nesting);
+            return $exception;
         }
     }
 
