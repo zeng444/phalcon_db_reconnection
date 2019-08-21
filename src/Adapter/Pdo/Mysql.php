@@ -76,8 +76,9 @@ class Mysql extends PdoMysql
         }
         if (!$this->connect()) {
             $this->_reconnectTime++;
+        }else{
+            $this->_reconnectTime = 0;
         }
-        $this->_reconnectTime = 0;
         return true;
     }
 
