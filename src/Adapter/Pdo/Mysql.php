@@ -71,12 +71,12 @@ class Mysql extends PdoMysql
      */
     public function reconnect(): bool
     {
-        if ($this->_reconnectTime > $this->maxRetryConnectTime) {
+        if ($this->_reconnectTime >= $this->maxRetryConnectTime - 1) {
             throw new \PDOException('Retry connection failed');
         }
         if (!$this->connect()) {
             $this->_reconnectTime++;
-        }else{
+        } else {
             $this->_reconnectTime = 0;
         }
         return true;
