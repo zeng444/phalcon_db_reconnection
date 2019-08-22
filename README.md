@@ -6,6 +6,7 @@
 
 - 客户端连接在MYSQL设置的interactive_timeout之间内没有任何操作，会被主动断开，造成操作报错
 - 捕捉数据库出现的CR_SERVER_GONE_ERROR、CR_SERVER_LOST两类报错，并自动重连，并重新执行之前想执行的SQL操作
+- 如果判定为事务进行中的写操作，不断线重连，防止破坏事务一致性，但会对事务begin就引起的掉线发起重连
 
 ## 使用
 
