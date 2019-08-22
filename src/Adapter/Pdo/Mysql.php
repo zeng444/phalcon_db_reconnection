@@ -173,7 +173,7 @@ class Mysql extends PdoMysql
         try {
             return parent::execute($sqlStatement, $bindParams, $bindTypes);
         } catch (\PDOException $exception) {
-            if (!$this->isConnectionError($exception->errorInfo)) {
+            if (!$this->isConnectionError($exception->errorInfo) || $this->_transactionLevel > 0) {
                 throw $exception;
             }
             $this->connect();
