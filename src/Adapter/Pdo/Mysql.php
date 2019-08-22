@@ -100,44 +100,44 @@ class Mysql extends PdoMysql
             return $this->begin($nesting);
         }
     }
-
-    /**
-     * Author:Robert
-     *
-     * @param bool $nesting
-     * @return bool|\Exception|\PDOException
-     */
-    public function rollback($nesting = true)
-    {
-        try {
-            return parent::rollback($nesting);
-        } catch (\PDOException $exception) {
-            if (!$this->isConnectionError($exception->errorInfo)) {
-                throw $exception;
-            }
-            $this->reconnect();
-            return $exception;
-        }
-    }
-
-    /**
-     * Author:Robert
-     *
-     * @param bool $nesting
-     * @return bool|\Exception|\PDOException
-     */
-    public function commit($nesting = true)
-    {
-        try {
-            return parent::commit($nesting);
-        } catch (\PDOException $exception) {
-            if (!$this->isConnectionError($exception->errorInfo)) {
-                throw $exception;
-            }
-            $this->reconnect();
-            return $exception;
-        }
-    }
+//
+    //    /**
+    //     * Author:Robert
+    //     *
+    //     * @param bool $nesting
+    //     * @return bool|\Exception|\PDOException
+    //     */
+    //    public function rollback($nesting = true)
+    //    {
+    //        try {
+    //            return parent::rollback($nesting);
+    //        } catch (\PDOException $exception) {
+    //            if (!$this->isConnectionError($exception->errorInfo)) {
+    //                throw $exception;
+    //            }
+    //            $this->reconnect();
+    //            return $exception;
+    //        }
+    //    }
+    //
+    //    /**
+    //     * Author:Robert
+    //     *
+    //     * @param bool $nesting
+    //     * @return bool|\Exception|\PDOException
+    //     */
+    //    public function commit($nesting = true)
+    //    {
+    //        try {
+    //            return parent::commit($nesting);
+    //        } catch (\PDOException $exception) {
+    //            if (!$this->isConnectionError($exception->errorInfo)) {
+    //                throw $exception;
+    //            }
+    //            $this->reconnect();
+    //            return $exception;
+    //        }
+    //    }
 
     /**
      * Author:Robert
