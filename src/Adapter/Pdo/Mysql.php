@@ -187,6 +187,7 @@ class Mysql extends PdoMysql
      * @param $table
      * @param $data
      * @param bool $duplicateUpdate
+     * @param array $noUpdate
      * @return bool
      */
     public function batchInsertAsDict($table, $data, $duplicateUpdate = false, $noUpdate = []): bool
