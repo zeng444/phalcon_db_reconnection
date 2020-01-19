@@ -180,4 +180,41 @@ class Mysql extends PdoMysql
             return $this->execute($sqlStatement, $bindParams, $bindTypes);
         }
     }
+
+    /**
+     * Author:Robert
+     *
+     * @param $table
+     * @param $data
+     * @param bool $duplicateUpdate
+     * @return bool
+     */
+    public function batchInsertAsDict($table, $data, $duplicateUpdate = false, $noUpdate = []): bool
+    {
+        $bind = [];
+        $sql = [];
+        $data = is_int(key($data)) ? $data : [$data];
+        foreach ($data as $index => $items) {
+            $holder = [];
+            foreach ($items as $name => $value) {
+                $pn = $name.$index;
+                $holder[] = ':'.$pn;
+                $bind[$pn] = $value;
+            }
+            $sql[] = '('.implode($holder, ',').')';
+        }
+        $fields = array_keys($data[0]);
+        $field = '`'.implode($fields, '`,`').'`';
+        $sql = "INSERT INTO $table ($field)VALUES".implode($sql, ',');
+        if ($duplicateUpdate) {
+            $duplicateUpdateSql = [];
+            foreach ($fields as $field) {
+                if (!$noUpdate || !in_array($field, $noUpdate)) {
+                    $duplicateUpdateSql[] = "`$field`=VALUES(`$field`)";
+                }
+            }
+            $sql .= 'ON DUPLICATE KEY UPDATE '.implode($duplicateUpdateSql, ',');
+        }
+        return $this->execute($sql, $bind);
+    }
 }
