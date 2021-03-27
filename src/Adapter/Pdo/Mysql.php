@@ -91,7 +91,7 @@ class Mysql extends PdoMysql
     public function begin($nesting = true): bool
     {
         try {
-            return parent::begin($nesting);
+            return @parent::begin($nesting);
         } catch (\PDOException $exception) {
             if (!$this->isConnectionError($exception->errorInfo)) {
                 throw $exception;
@@ -110,7 +110,7 @@ class Mysql extends PdoMysql
     //    public function rollback($nesting = true)
     //    {
     //        try {
-    //            return parent::rollback($nesting);
+    //            return @parent::rollback($nesting);
     //        } catch (\PDOException $exception) {
     //            if (!$this->isConnectionError($exception->errorInfo)) {
     //                throw $exception;
@@ -129,7 +129,7 @@ class Mysql extends PdoMysql
     //    public function commit($nesting = true)
     //    {
     //        try {
-    //            return parent::commit($nesting);
+    //            return @parent::commit($nesting);
     //        } catch (\PDOException $exception) {
     //            if (!$this->isConnectionError($exception->errorInfo)) {
     //                throw $exception;
@@ -150,7 +150,7 @@ class Mysql extends PdoMysql
     public function query($sqlStatement, $bindParams = null, $bindTypes = null)
     {
         try {
-            return parent::query($sqlStatement, $bindParams, $bindTypes);
+            return @parent::query($sqlStatement, $bindParams, $bindTypes);
         } catch (\PDOException $exception) {
             if (!$this->isConnectionError($exception->errorInfo)) {
                 throw $exception;
@@ -171,7 +171,7 @@ class Mysql extends PdoMysql
     public function execute($sqlStatement, $bindParams = null, $bindTypes = null): bool
     {
         try {
-            return parent::execute($sqlStatement, $bindParams, $bindTypes);
+            return @parent::execute($sqlStatement, $bindParams, $bindTypes);
         } catch (\PDOException $exception) {
             if (!$this->isConnectionError($exception->errorInfo) || $this->_transactionLevel > 0) {
                 throw $exception;
